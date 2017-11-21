@@ -9,10 +9,7 @@ RUN apk add --update g++ make python \
     && apk --purge -v del g++ make python \
     && rm -rf /var/cache/apk/*
 
-RUN mkdir /var/kinesalite
-RUN chown kinesalite /var/kinesalite
-
 USER kinesalite
 
 EXPOSE 4567
-ENTRYPOINT ["kinesalite", "--path", "/var/kinesalite"]
+ENTRYPOINT ["kinesalite"]
