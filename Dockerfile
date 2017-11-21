@@ -1,8 +1,13 @@
-FROM node:8
+FROM node:8-alpine
 
-RUN yarn global add kinesalite
+RUN addgroup kinesalite && adduser -H -D -G kinesalite kinesalite
 
-RUN groupadd kinesalite && useradd --gid kinesalite kinesalite
+# see https://github.com/npm/npm/issues/17851 for npm permissions issues when
+# installing global packages as root, --unsafe-perm resolves this
+RUN apk add --update g++ make python \
+    && npm install -g --unsafe-perm --build-from-source  kinesalite \
+    && apk --purge -v del g++ make python \
+    && rm -rf /var/cache/apk/*
 
 RUN mkdir /var/kinesalite
 RUN chown kinesalite /var/kinesalite
