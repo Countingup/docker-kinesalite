@@ -1,6 +1,6 @@
 # Kinesalite
 
-[![Docker Automated buil](https://img.shields.io/docker/build/countingup/kinesalite.svg)](https://hub.docker.com/r/countingup/kinesalite/builds/)
+[![Docker Automated build](https://img.shields.io/docker/build/countingup/kinesalite.svg)](https://hub.docker.com/r/countingup/kinesalite/builds/)
 
 A docker image for [Kinesalite](https://github.com/mhart/kinesalite) which provides a Node.js based implementation of [AWS Kinesis Streams](https://aws.amazon.com/kinesis/streams/). This can then be used in development and testing.
 
@@ -28,8 +28,6 @@ Options:
 Report bugs at github.com/mhart/kinesalite/issues
 ```
 
-Stores data in `/var/kinesalite`, mount a volume here to persist this.
-
 ## Build locally
 
 ```
@@ -43,9 +41,9 @@ $ docker build -t countingup/kinesalite .
 # Default
 $ docker run -d -p 4567:4567 countingup/kinesalite
 
-# With persistent volume
-$ docker run -d -p 4567:4567 -v /some/path:/var/kinesalite countingup/kinesalite
-
 # With additional options
 $ docker run -d -p 4567:4567 countingup/kinesalite --shardLimit 5
+
+# With persistent data
+$ docker run -d -p 4567:4567 -v /some/host/path:/some/container/path countingup/kinesalite --path /some/container/path
 ```
