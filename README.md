@@ -4,7 +4,7 @@
 
 A docker image for [Kinesalite](https://github.com/mhart/kinesalite) which provides a Node.js based implementation of [AWS Kinesis Streams](https://aws.amazon.com/kinesis/streams/). This can then be used in development and testing.
 
-Based on the latest Node.js 8 (LTS) library image from Docker Hub.
+Based on the latest Node.js 8 (LTS) Alpine library image from Docker Hub.
 
 Supports passing all options to Kinesalite (also see the [README](https://github.com/mhart/kinesalite/blob/master/README.md)):
 
