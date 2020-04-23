@@ -1,13 +1,13 @@
-FROM node:8-alpine
+FROM node:12-alpine
 
 RUN addgroup kinesalite && adduser -H -D -G kinesalite kinesalite
 
-# see https://github.com/npm/npm/issues/17851 for npm permissions issues when
+# See https://github.com/npm/npm/issues/17851 for npm permissions issues when
 # installing global packages as root, --unsafe-perm resolves this
-RUN apk add --update g++ make python \
-    && npm install -g --unsafe-perm --build-from-source kinesalite@~2.0.0 \
-    && apk --purge -v del g++ make python \
-    && rm -rf /var/cache/apk/*
+
+# leveldown needs g++, make, python to compile (node-gyp)
+RUN apk --no-cache --update add g++ make python3 \ 
+    && npm install -g --unsafe-perm --build-from-source kinesalite@3.x
 
 USER kinesalite
 
