@@ -1,0 +1,23 @@
+#
+# CI pipeline for building the countingup/kinesalite Docker image and pushing to Docker Hub
+#
+name: Build and deploy image
+version: v1.0
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build and deploy image
+    task:
+      secrets:
+        - name: countingup-dockerhub
+      jobs:
+        - name: Build and deploy image
+          commands:
+            - checkout
+            - docker build -t countingup/kinesalite .
+            - echo "${DOCKERHUB_PASSWORD}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - docker push countingup/kinesalite
