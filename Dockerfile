@@ -1,5 +1,7 @@
 FROM node:12-alpine
 
+LABEL org.opencontainers.image.source="https://github.com/Countingup/docker-kinesalite"
+
 RUN addgroup kinesalite && adduser -H -D -G kinesalite kinesalite
 
 # See https://github.com/npm/npm/issues/17851 for npm permissions issues when
